@@ -1,9 +1,9 @@
 # Combo.jl: Combinatorial Optimization in Julia
 
-Install by executing in the REPL,
+Install by executing in the REPL,\n
 `Pkg.clone("github.com/uripatish/Combo.jl")`
 
-See help by using ? at the REPT,
+See help by using ? at the REPL,\n
 `?Combo`
 
 Better documention will be available sometime soon. 
