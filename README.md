@@ -1,7 +1,12 @@
-# Combo
+# Combo.jl: Combinatorial Optimization in Julia
 
-[![Build Status](https://travis-ci.org/Uri Patish/Combo.jl.svg?branch=master)](https://travis-ci.org/Uri Patish/Combo.jl)
+Install by executing in the REPL,
+`Pkg.clone("github.com/uripatish/Combo.jl")`
 
-[![Coverage Status](https://coveralls.io/repos/Uri Patish/Combo.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/Uri Patish/Combo.jl?branch=master)
+See help by using ? at the REPT,
+`?Combo`
 
-[![codecov.io](http://codecov.io/github/Uri Patish/Combo.jl/coverage.svg?branch=master)](http://codecov.io/github/Uri Patish/Combo.jl?branch=master)
+Better documention will be available sometime soon. 
+
+If you use cakewalk in an academic work, please make sure to cite the following paper, 
+[1] Cakewalk Sampling. CoRR abs/1802.09030 (2018).
