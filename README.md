@@ -2,7 +2,7 @@
 
 Install by executing in the REPL
 
-`Pkg.clone("github.com/uripatish/Combo.jl")`
+`Pkg.clone("git://github.com/uripatish/Combo.jl.git")`
 
 See help by using ? at the REPL,
 
