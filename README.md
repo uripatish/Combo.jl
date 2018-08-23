@@ -11,4 +11,5 @@ See help by using ? at the REPL,
 Documention pages will be available sometime soon. 
 
 If you use cakewalk in an academic work, please make sure to cite the following paper, 
+
 [1] Cakewalk Sampling. CoRR abs/1802.09030 (2018).
