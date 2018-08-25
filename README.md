@@ -1,6 +1,6 @@
 # Combo.jl: Combinatorial Optimization in Julia
 
-Install by executing in the REPL
+Install by executing in the REPL,
 
 `Pkg.clone("git://github.com/uripatish/Combo.jl.git")`
 
