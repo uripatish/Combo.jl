@@ -2,11 +2,11 @@
 
 # Combo.jl: Combinatorial Optimization in Julia
 
+Julia versions: working on v0.6, version for 0.7/1.0 will be available sometime soon. 
+
 Install by executing in the REPL,
 
-`Pkg.clone("git://github.com/uripatish/Combo.jl.git")`
-
-Julia versions: working on v0.6, version for 1.0 is still failing. 
+`Pkg.clone("git://github.com/uripatish/Combo.jl.git")` 
 
 See help by using `?` at the REPL. To browse Combo's functionality use `?Combo`, and `?` for any particular function exported by Combo (e.g. `?cakewalk`). Documention pages will be available sometime soon. 
 
