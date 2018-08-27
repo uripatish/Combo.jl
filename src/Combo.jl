@@ -1,7 +1,7 @@
 """
 # COMBinatorial Optimization in Julia
 
-The functions listed below are exported, see the help on each of these using the ? operator.\n
+The functions listed below are exported, see help on each of these using the ? operator.\n
 
 ## blackbox combinatorial optization
 
