@@ -1,18 +1,22 @@
 """
 # COMBinatorial Optimization in Julia
 
-See help on each of the exported functions.\n
+The functions listed below are exported, see the help on each of these using the ? operator.\n
 
 ## blackbox combinatorial optization
 
-`cakewalk` \n
+`cakewalk` - main entry point for the package. \n
 
 ### clique finding in undirected graphs
 
-`clique_cw` \n
-`is_local_max_clique` \n
+`clique_cw` - uses cakewalk to find cliques. \n
+`is_local_max_clique` - validate that a clique is a locally maximal. \n
 
 ### k-medoids
+
+Two standard algorithms for the k-medoids problem are supplied. A third algorithm
+that utilizes a greedy search, and whose starting point is optimized by cakewalk 
+will be added sometime soon. \n
 
 `kmedoids_voronoi` \n
 `kmedoids_pam` \n
