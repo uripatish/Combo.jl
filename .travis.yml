@@ -3,9 +3,8 @@ language: julia
 os:
   - linux
   - osx
-  - windows
 julia:
-  - 0.6
+  - 0.6.4
 notifications:
   email: false
 git:
