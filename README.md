@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/uripatish/Combo.jl.svg?branch=master)](https://travis-ci.org/uripatish/Combo.jl)]
+
 # Combo.jl: Combinatorial Optimization in Julia
 
 Install by executing in the REPL,
