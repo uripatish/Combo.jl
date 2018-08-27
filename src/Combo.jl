@@ -3,7 +3,7 @@
 
 The functions listed below are exported, see help on each of these using the ? operator.\n
 
-## blackbox combinatorial optization
+### blackbox combinatorial optization
 
 `cakewalk` - main entry point for the package. \n
 
