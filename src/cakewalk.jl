@@ -1,5 +1,5 @@
 """
-# Black-box Combinatorial Optimization via Cakewalk Sampling
+# Black-box Combinatorial Optimization using the Cakewalk method.
 
 ## Usage
 `cakewalk(objective_function::Function, M::Int, N::Int, args...)`\n
@@ -365,7 +365,7 @@ function cakewalk_worker(
         remotecall_fetch(fetchcall, manager_id, rr_send_result, seq, seq_tag, comp, val)              
         
       catch exception
-        is_interrupt = isa(e, InterruptException)
+        is_interrupt = isa(exception, InterruptException)
         loop = !throw_exceptions && !is_interrupt
         if !is_interrupt
           remotecall_fetch(fetchcall, manager_id, rr_send_exception, exception)              
