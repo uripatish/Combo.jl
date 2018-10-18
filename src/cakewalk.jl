@@ -1,5 +1,5 @@
 """
-# Black-box Combinatorial Optimization using the Cakewalk method.
+# Black-box combinatorial optimization with the Cakewalk method.
 
 ## Usage
 `cakewalk(objective_function::Function, M::Int, N::Int, args...)`\n
@@ -155,116 +155,112 @@ function cakewalk(objective_function::Function, M::Int, N::Int, args...;
   exception = Nullable{Exception}()
 
   local seq, opt_samp
-  get_input, send_result, send_exception = 
-  let
-    (
-      () -> begin                    
 
-              try
-                lock(input_lock)   
+  function get_input()
+    try
+      lock(input_lock)   
 
-                if exhaustive
-                  seq_tuple, seq_state = next(seq_iter, seq_state)
-                  seq = Int[seq_tuple...]
-                  comp = -1
-                else
-                  seq, comp = randseq(dist)
-                end
+      if exhaustive
+        seq_tuple, seq_state = next(seq_iter, seq_state)
+        seq = Int[seq_tuple...]
+        comp = -1
+      else
+        seq, comp = randseq(dist)
+      end
 
-                return (seq, comp)
+      return (seq, comp)
 
-              catch e
-                if throw_exceptions
-                  throw(e)
-                end
-              finally
-                unlock(input_lock)
-              end
-            end, 
-      (res_seq, res_seq_tag, res_comp, res_val) -> 
-            begin
-              try
-                lock(result_lock)     
-
-                if loop 
-                  total_samps += 1
-
-                  if is_better(res_val[2], opt_val[2], min_type) || ((res_val[2] == opt_val[2]) && is_better(res_val[1], opt_val[1], min_type)) 
-                    opt_seq = copy(res_seq_tag)
-                    opt_val = res_val
-                    opt_samp = total_samps
-                  end
-
-                  if !exhaustive
-                    dist_obj = update!(dist, transform_seq ? res_seq_tag : res_seq, res_comp, min_sign*Float(res_val[1]); kwargs...)
-                    
-                    avg_stat = res_val[1]
-
-                    avg_short = (1 - tau_short)*avg_short + tau_short*avg_stat
-                    weight_short = (1 - tau_short)*weight_short + tau_short  
-                    avg_short_bar = avg_short/weight_short
-
-                    avg_long = (1 - tau_long)*avg_long + tau_long*avg_stat
-                    weight_long = (1 - tau_long)*weight_long + tau_long  
-                    avg_long_bar = avg_long/weight_long
-
-                    diff_ratio = abs(fixnan((avg_long_bar - avg_short_bar)/avg_long_bar))
-                  end
-                  
-                  file_name = String(has_savedir && (mod(total_samps, save_mod) == 0) ? joinpath(save_dir, string("cakewalk_data_", randstring(), ".jls")) : "")
-
-                  if !isempty(file_name)
-                    save_data(file_name)
-                  end
-                  
-                  if verbose && (mod(total_samps, verbose_mod) == 0)                  
-                    @printf(verbose_fid, "%-14d %-14.6f %-14.6f %-14.6f %-14.6f %-14.6f %-14.6f %-s\n", total_samps, res_val[1], opt_val[1], opt_val[2], dist_obj, min(weight_short, weight_long), diff_ratio, file_name);
-                  end
-
-                  if !exhaustive
-                    if (weight_short > min_weight) && (weight_long > min_weight)
-                      loop = diff_ratio > epsi
-                    end
-                    if total_samps >= max_samps
-                      loop = false
-                    end
-                  else
-                    loop = total_samps < length(seq_iter)
-                  end
-
-                  if !loop
-                    set!(rr_loop, false)                    
-                    println()
-                    notify(loop_cond)
-                  end
-
-                end
-
-                return :ok
-              catch e
-                if throw_exceptions
-                  throw(e)
-                end                
-              finally
-                unlock(result_lock)
-              end  
-            end,           
-      (res_exception) -> begin                    
-              try
-                lock(exception_lock)   
-                if throw_exceptions 
-                  loop = false                  
-                  exception = Nullable{Exception}(res_exception)
-                  set!(rr_loop, false)                    
-                  println()
-                  notify(loop_cond)
-                end
-              finally
-                unlock(exception_lock)
-              end
-            end             
-    )
+    catch e
+      if throw_exceptions
+        throw(e)
+      end
+    finally
+      unlock(input_lock)
+    end
   end
+
+  function send_result(res_seq, res_seq_tag, res_comp, res_val)
+    try
+      lock(result_lock)     
+
+      if loop 
+        total_samps += 1
+
+        if is_better(res_val[2], opt_val[2], min_type) || ((res_val[2] == opt_val[2]) && is_better(res_val[1], opt_val[1], min_type)) 
+          opt_seq = copy(res_seq_tag)
+          opt_val = res_val
+          opt_samp = total_samps
+        end
+
+        if !exhaustive
+          dist_obj = update!(dist, transform_seq ? res_seq_tag : res_seq, res_comp, min_sign*Float(res_val[1]); kwargs...)
+          
+          avg_stat = res_val[1]
+
+          avg_short = (1 - tau_short)*avg_short + tau_short*avg_stat
+          weight_short = (1 - tau_short)*weight_short + tau_short  
+          avg_short_bar = avg_short/weight_short
+
+          avg_long = (1 - tau_long)*avg_long + tau_long*avg_stat
+          weight_long = (1 - tau_long)*weight_long + tau_long  
+          avg_long_bar = avg_long/weight_long
+
+          diff_ratio = abs(fixnan((avg_long_bar - avg_short_bar)/avg_long_bar))
+        end
+        
+        file_name = String(has_savedir && (mod(total_samps, save_mod) == 0) ? joinpath(save_dir, string("cakewalk_data_", randstring(), ".jls")) : "")
+
+        if !isempty(file_name)
+          save_data(file_name)
+        end
+        
+        if verbose && (mod(total_samps, verbose_mod) == 0)                  
+          @printf(verbose_fid, "%-14d %-14.6f %-14.6f %-14.6f %-14.6f %-14.6f %-14.6f %-s\n", total_samps, res_val[1], opt_val[1], opt_val[2], dist_obj, min(weight_short, weight_long), diff_ratio, file_name);
+        end
+
+        if !exhaustive
+          if (weight_short > min_weight) && (weight_long > min_weight)
+            loop = diff_ratio > epsi
+          end
+          if total_samps >= max_samps
+            loop = false
+          end
+        else
+          loop = total_samps < length(seq_iter)
+        end
+
+        if !loop
+          set!(rr_loop, false)                    
+          println()
+          notify(loop_cond)
+        end
+
+      end
+
+      return :ok
+    catch e
+      if throw_exceptions
+        throw(e)
+      end                
+    finally
+      unlock(result_lock)
+    end  
+  end
+
+  function send_exception(res_exception) 
+    try
+      lock(exception_lock)   
+      if throw_exceptions 
+        loop = false                  
+        exception = Nullable{Exception}(res_exception)
+        set!(rr_loop, false)                    
+        println()
+        notify(loop_cond)
+      end
+    finally
+      unlock(exception_lock)
+    end
+  end             
   # function references
   rr_get_input = RemoteChannel()
   rr_send_result = RemoteChannel()    
