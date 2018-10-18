@@ -330,7 +330,7 @@ function cakewalk_worker(
 
   exception = Nullable{Exception}()
   task = 
-  @async begin
+  @schedule begin
     loop = true
     while loop && fetch(rr_loop)
       try          
