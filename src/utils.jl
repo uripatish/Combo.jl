@@ -6,7 +6,7 @@ fixdiv(x::Float) = x == 0 ? Float(1) : x
 
 logprob(p::Float, eps_val::Float = eps(Float)) = log(fixprob(p, eps_val))
 
-tau(min_samps::Int, min_weight::Float) = (Float(1) - exp(log(Float(1)-min_weight)/min_samps))
+tau(min_samps, min_weight::Float) = (Float(1) - exp(log(Float(1)-min_weight)/min_samps))
 
 function logsumexp{N}(arr::Array{Float, N})  
   add_val = maximum(arr, 1)

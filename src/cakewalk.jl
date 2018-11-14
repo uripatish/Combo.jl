@@ -59,7 +59,7 @@ function cakewalk(objective_function::Function, M::Int, N::Int, args...;
   max_samps::Int = (tot_samps == 0) ? round(Int, 1e6)*M*N : tot_samps,  
   min_weight::Float = Float(.99),  
   tau_short::Float = tau(min_samps,min_weight),
-  tau_ratio::Int = 2,
+  tau_ratio::Float = Float(2),
   tau_long::Float = tau(min_samps*tau_ratio,min_weight),
   epsi::Float = Float(1e-2),
 
