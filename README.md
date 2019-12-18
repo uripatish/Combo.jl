@@ -12,6 +12,6 @@ Install by executing in the REPL,
 
 See help by using `?` at the REPL. To browse Combo's functionality use `?Combo`, and `?` for any particular function exported by Combo (e.g. `?cakewalk`). Documention pages will be available sometime soon. 
 
-If you use cakewalk in an academic work, please make sure to cite the following paper, 
+If you use cakewalk in an academic work, please cite the following paper:
 
-[1] Cakewalk Sampling. Uri Patish, Shimon Ullman, AAAI20.
+[-] Cakewalk Sampling. Uri Patish, Shimon Ullman, AAAI20.
