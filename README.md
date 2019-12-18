@@ -14,4 +14,4 @@ See help by using `?` at the REPL. To browse Combo's functionality use `?Combo`,
 
 If you use cakewalk in an academic work, please make sure to cite the following paper, 
 
-[1] Cakewalk Sampling. Uri Patish, Shimon Ullman, CoRR abs/1802.09030 (2018).
+[1] Cakewalk Sampling. Uri Patish, Shimon Ullman, AAAI20.
