@@ -10,7 +10,7 @@ Install by executing in the REPL,
 
 `Pkg.clone("git://github.com/uripatish/Combo.jl.git")` 
 
-See help by using `?` at the REPL. To browse Combo's functionality use `?Combo`, and `?` for any particular function exported by Combo (e.g. `?cakewalk`). Documention pages will be available sometime soon. 
+See help by using `?` at the REPL. To browse Combo's functionality use `?Combo`, and `?` for any particular function exported by Combo (e.g. `?cakewalk`). 
 
 If you use cakewalk in an academic work, please cite the following paper:
 
